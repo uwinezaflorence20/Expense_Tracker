@@ -31,10 +31,10 @@ const ExpenseForm: React.FC<Props> = ({ addExpense }) => {
   };
 
   return (
-    <div className=' mb-4'>
+    <div className=' bg-white  rounded-xl shadow-lg max-w-lg mx-auto '>
     <form 
       onSubmit={handleSubmit} 
-      className="bg-[#f2f8ff] rounded-xl  shadow-lg px-24 py-6 max-w-md mx-auto"
+      className="bg-white p-6 rounded-xl shadow-lg max-w-lg mx-auto "
     >
       <div className="text-center mb-2">
         <h2 className="text-xl font-bold text-gray-800">Expense Tracker</h2>

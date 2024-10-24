@@ -22,10 +22,10 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, removeExpense, upda
     ? expenses
     : expenses.filter(expense => expense.category === selectedCategory);
 
-  // Handle editing
+
   const handleEditClick = (index: number) => {
     setEditingIndex(index);
-    setEditFormData(expenses[index]); // Load the existing expense data into the form
+    setEditFormData(expenses[index]); 
   };
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -37,8 +37,8 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, removeExpense, upda
   const handleEditSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editFormData !== null && editingIndex !== null) {
-      updateExpense(editingIndex, editFormData); // Pass updated data to parent component
-      setEditingIndex(null); // Close the edit form after updating
+      updateExpense(editingIndex, editFormData); 
+      setEditingIndex(null); 
     }
   };
 
@@ -49,8 +49,8 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, removeExpense, upda
         <p className="text-gray-500">Manage your expenses efficiently</p>
       </div>
 
-      {/* Filter section */}
-      <div className="mb-6">
+     
+      <div className="">
         <label htmlFor="categoryFilter" className="block mb-2 text-gray-600">Filter by Category:</label>
         <select
           id="categoryFilter"
@@ -67,7 +67,6 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, removeExpense, upda
         </select>
       </div>
 
-      {/* Scrollable expense list */}
       {filteredExpenses.length === 0 ? (
         <p className="text-center text-gray-500">No expenses found for this category.</p>
       ) : (

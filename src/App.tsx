@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ExpenseForm from './Components/ExpensesForm';
 import ExpenseList from './Components/ExpenseList';
+import ExpenseCharts from './Components/ExpensesCharts'; // Import the ExpenseCharts component
 
 type Expense = {
   amount: number;
@@ -11,6 +12,7 @@ type Expense = {
 
 const dbName = 'ExpenseTrackerDB';
 const storeName = 'expenses';
+
 const openDatabase = async (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(dbName, 1);
@@ -98,15 +100,17 @@ const App: React.FC = () => {
   const total = expenses.reduce((acc, curr) => acc + (parseFloat(curr.amount.toString()) || 0), 0);
 
   return (
-    <div className="container flex mx-auto  p-9 bg-[#deedff]">
+    <div className='bg-[#deedff]' >
+    <div className="container flex flex-row mx-auto p-9">
       <ExpenseForm addExpense={addExpense} />
       <ExpenseList
         expenses={expenses}
         removeExpense={removeExpense}
-        updateExpense={updateExpense} // Pass the updateExpense function
-      />
-      <div className="text-2xl">
-        <strong>Total:</strong> ${total.toFixed(2)}
+        updateExpense={updateExpense} />
+       <ExpenseCharts expenses={expenses} />
+    </div>
+    <div className=" text-xl text-center">
+        <strong>Total Amount on Expenses:</strong> ${total.toFixed(2)}
       </div>
     </div>
   );
