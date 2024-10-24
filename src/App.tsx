@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ExpenseForm from './Components/ExpensesForm';
 import ExpenseList from './Components/ExpenseList';
+
 type Expense = {
   amount: number;
   category: string;
   date: string;
   description: string;
 };
+
 const dbName = 'ExpenseTrackerDB';
 const storeName = 'expenses';
 const openDatabase = async (): Promise<IDBDatabase> => {
@@ -84,12 +86,25 @@ const App: React.FC = () => {
     saveExpenses(updatedExpenses);
   };
 
-  const total = expenses.reduce((acc, curr) => acc + curr.amount, 0);
+  const updateExpense = (index: number, updatedExpense: Expense) => {
+    const updatedExpenses = expenses.map((expense, i) =>
+      i === index ? updatedExpense : expense
+    );
+    setExpenses(updatedExpenses);
+    saveExpenses(updatedExpenses);  // To store updated expenses in IndexedDB
+  };
+
+  // Error-corrected total calculation
+  const total = expenses.reduce((acc, curr) => acc + (parseFloat(curr.amount.toString()) || 0), 0);
 
   return (
     <div className="container flex mx-auto  p-9 bg-[#deedff]">
       <ExpenseForm addExpense={addExpense} />
-      <ExpenseList expenses={expenses} removeExpense={removeExpense} />
+      <ExpenseList
+        expenses={expenses}
+        removeExpense={removeExpense}
+        updateExpense={updateExpense} // Pass the updateExpense function
+      />
       <div className="text-2xl">
         <strong>Total:</strong> ${total.toFixed(2)}
       </div>
