@@ -93,26 +93,27 @@ const App: React.FC = () => {
       i === index ? updatedExpense : expense
     );
     setExpenses(updatedExpenses);
-    saveExpenses(updatedExpenses);  // To store updated expenses in IndexedDB
+    saveExpenses(updatedExpenses);  
   };
 
-  // Error-corrected total calculation
   const total = expenses.reduce((acc, curr) => acc + (parseFloat(curr.amount.toString()) || 0), 0);
 
   return (
-    <div className='bg-[#deedff]' >
-    <div className="container flex flex-row mx-auto p-9">
+    <div className='bg-[#deedff]'>
+    <div className="container flex flex-col md:flex-row gap-10 mx-auto p-9">
       <ExpenseForm addExpense={addExpense} />
       <ExpenseList
         expenses={expenses}
         removeExpense={removeExpense}
-        updateExpense={updateExpense} />
-       <ExpenseCharts expenses={expenses} />
+        updateExpense={updateExpense} 
+      />
+      <ExpenseCharts expenses={expenses} />
     </div>
-    <div className=" text-xl text-center">
-        <strong>Total Amount on Expenses:</strong> ${total.toFixed(2)}
-      </div>
+    <div className="text-xl text-center">
+      <strong>Total Amount on Expenses:</strong> ${total.toFixed(2)}
     </div>
+  </div>
+  
   );
 };
 
