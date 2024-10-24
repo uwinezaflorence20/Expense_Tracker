@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ExpenseForm from './Components/ExpensesForm';
 import ExpenseList from './Components/ExpenseList';
-
-// Define the type for an individual expense
 type Expense = {
   amount: number;
   category: string;
   date: string;
   description: string;
 };
-
-// Database configuration
 const dbName = 'ExpenseTrackerDB';
 const storeName = 'expenses';
-
-// Open the IndexedDB database
 const openDatabase = async (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(dbName, 1);
@@ -71,8 +65,6 @@ const App: React.FC = () => {
       const db = await openDatabase();
       const transaction = db.transaction(storeName, 'readwrite');
       const store = transaction.objectStore(storeName);
-
-      // Clear the store and add all expenses
       store.clear();
       expenses.forEach(expense => store.add(expense));
     } catch (error) {
@@ -95,11 +87,10 @@ const App: React.FC = () => {
   const total = expenses.reduce((acc, curr) => acc + curr.amount, 0);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Expense Tracker</h1>
+    <div className="container flex mx-auto  p-9 bg-[#deedff]">
       <ExpenseForm addExpense={addExpense} />
       <ExpenseList expenses={expenses} removeExpense={removeExpense} />
-      <div className="mt-4">
+      <div className="text-2xl">
         <strong>Total:</strong> ${total.toFixed(2)}
       </div>
     </div>

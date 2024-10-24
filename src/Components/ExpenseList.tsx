@@ -14,22 +14,25 @@ interface ExpenseListProps {
 
 const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, removeExpense }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-
   const filteredExpenses = selectedCategory === 'All'
     ? expenses
     : expenses.filter(expense => expense.category === selectedCategory);
 
   return (
-    <div className="bg-gray-100 p-4 rounded shadow mt-4">
-      <h2 className="text-xl mb-4">Expenses</h2>
+    <div className="bg-white p-6 rounded-xl shadow-lg max-w-lg mx-auto">
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">Expense List</h2>
+        <p className="text-gray-500">Manage your expenses efficiently</p>
+      </div>
 
-      <div className="mb-4">
-        <label htmlFor="categoryFilter" className="block mb-2">Filter by Category:</label>
+      
+      <div className="mb-6">
+        <label htmlFor="categoryFilter" className="block mb-2 text-gray-600">Filter by Category:</label>
         <select
           id="categoryFilter"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="p-2 border rounded"
+          className="block w-full p-3 border border-gray-300 rounded-xl focus:ring focus:ring-blue-300"
         >
           <option value="All">All</option>
           <option value="Food">Food</option>
@@ -40,16 +43,26 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, removeExpense }) =>
         </select>
       </div>
 
+      {/* Scrollable expense list */}
       {filteredExpenses.length === 0 ? (
-        <p>No expenses found for this category.</p>
+        <p className="text-center text-gray-500">No expenses found for this category.</p>
       ) : (
-        <ul>
+        <ul className="space-y-4 max-h-60 overflow-y-scroll">
           {filteredExpenses.map((expense, index) => (
-            <li key={index} className="mb-2">
-              <strong>{expense.category}</strong>: ${expense.amount} on {expense.date} - {expense.description}
+            <li
+              key={index}
+              className="flex justify-between items-center p-4 bg-gray-100 rounded-xl shadow-sm"
+            >
+              <div>
+                <strong className="text-gray-700">{expense.category}</strong>
+                <p className="text-gray-500">
+                  ${expense.amount} on {expense.date}
+                </p>
+                <p className="text-gray-400 text-sm">{expense.description}</p>
+              </div>
               <button
                 onClick={() => removeExpense(index)}
-                className="ml-4 text-red-500"
+                className="ml-4 bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition"
               >
                 Delete
               </button>

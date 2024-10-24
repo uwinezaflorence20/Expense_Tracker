@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-
-// Define the type for an individual expense
 type Expense = {
   amount: number;
   category: string;
@@ -33,18 +31,26 @@ const ExpenseForm: React.FC<Props> = ({ addExpense }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow">
+    <div className=' mb-4'>
+    <form 
+      onSubmit={handleSubmit} 
+      className="bg-[#f2f8ff] rounded-xl  shadow-lg px-24 py-6 max-w-md mx-auto"
+    >
+      <div className="text-center mb-2">
+        <h2 className="text-xl font-bold text-gray-800">Expense Tracker</h2>
+        <p className="text-gray-500">Keep your finances in check</p>
+      </div>
       <input
         type="number"
         placeholder="Amount"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
-        className="block w-full mb-2 p-2 border"
+        className="block w-full mb-4 p-3 rounded-xl border border-gray-300 focus:ring focus:ring-blue-300"
       />
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="block w-full mb-2 p-2 border"
+        className="block w-full mb-4 p-3 rounded-xl border border-gray-300 focus:ring focus:ring-blue-300"
       >
         <option value="">Select Category</option>
         <option value="Food">Food</option>
@@ -57,18 +63,22 @@ const ExpenseForm: React.FC<Props> = ({ addExpense }) => {
         type="date"
         value={date}
         onChange={(e) => setDate(e.target.value)}
-        className="block w-full mb-2 p-2 border"
+        className="block w-full mb-4 p-3 rounded-xl border border-gray-300 focus:ring focus:ring-blue-300"
       />
       <textarea
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        className="block w-full mb-2 p-2 border"
+        className="block w-full mb-4 p-3 rounded-xl border border-gray-300 focus:ring focus:ring-blue-300"
       />
-      <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
+      <button 
+        type="submit" 
+        className="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold hover:bg-blue-600 transition"
+      >
         Add Expense
       </button>
     </form>
+    </div>
   );
 };
 
