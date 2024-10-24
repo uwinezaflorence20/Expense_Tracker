@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ExpenseForm from './Components/ExpensesForm';
 import ExpenseList from './Components/ExpenseList';
-import ExpenseCharts from './Components/ExpensesCharts'; // Import the ExpenseCharts component
+import ExpenseCharts from './Components/ExpensesCharts'; 
 
 type Expense = {
   amount: number;

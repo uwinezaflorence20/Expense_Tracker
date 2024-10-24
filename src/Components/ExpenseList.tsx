@@ -15,8 +15,8 @@ interface ExpenseListProps {
 
 const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, removeExpense, updateExpense }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [editingIndex, setEditingIndex] = useState<number | null>(null); // Track the index of the item being edited
-  const [editFormData, setEditFormData] = useState<Expense | null>(null); // Track the data being edited
+  const [editingIndex, setEditingIndex] = useState<number | null>(null); 
+  const [editFormData, setEditFormData] = useState<Expense | null>(null); 
 
   const filteredExpenses = selectedCategory === 'All'
     ? expenses
